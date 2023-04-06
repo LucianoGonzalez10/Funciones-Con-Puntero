@@ -1,0 +1,177 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pila.h"
+
+Pila cargarPila ();
+int main()
+{
+    cargarPila();
+
+}
+
+Pila cargarPila (){
+Pila a;
+inicpila(&a);
+
+char control = 's';
+while(control == 's'){
+    leer(&a);
+    printf("Quiere seguir? ");
+    fflush(stdin);
+    scanf("%c", &control);
+
+
+}
+
+return a;
+
+}
+
+Pila desapilaPila(){Pila a;
+    inicpila(&a);
+    a = cargarPila();
+Pila desapilado;
+inicpila (&desapilado);
+Pila a;
+inicpila (&a);
+a = cargarPila(a);
+while(!pilavacia(&a)){
+    apilar(&desapilado , desapilar(&a));
+}
+
+return desapilado;
+}
+
+Pila pasarOrdenada (){
+Pila ordenada;
+inicpila(&ordenada);
+Pila a, desapilado;
+inicpila(&a);
+inicpila(&desapilado);
+desapilado = desapilaPila();
+while(!pilavacia(&desapilado)){
+    apilar(&ordenada, desapilar(&desapilado));
+}
+return ordenada;
+}
+
+Pila buscarMenor(){
+Pila menor, aux, a;
+inicpila(&menor);
+inicpila(&aux);
+inicpila(&a);
+a = cargarPila();
+apilar(&menor, desapilar(&a));
+while(!pilavacia(&a)){
+    if(tope(&menor) > tope(&a)){
+    apilar(&aux, desapilar(&menor));
+    apilar(&menor, desapilar(&a));
+    }
+    else{
+        apilar(&aux, desapilar(&a));
+    }
+}
+return menor;
+}
+
+Pila insertarElemento(){
+Pila a, elemento, aux;
+inicpila(&a);
+inicpila(&elemento);
+inicpila(&aux);
+a = cargarPila();
+leer(&elemento);
+while(!pilavacia(&elemento)){
+    if(tope(&elemento) < tope(&a)){
+        apilar(&aux, desapilar(&a));
+    }Pila a;
+    inicpila(&a);
+    a = cargarPila();
+    else{
+        apilar(&a, desapilar(&elemento));
+    }
+}
+while(!pilavacia(&aux)){
+    apilar(&a, desapilar(&aux));
+}
+return a;
+}
+
+int sumarTope(){
+    Pila a;
+    inicpila(&a);
+    a = cargarPila();
+    int suma = desapilar(&a), resultado = 0;
+    resultado = suma+tope(&a);
+
+
+return resultado;
+}
+
+int sumarPila(){
+    int suma = 0;
+    Pila a;
+    inicpila(&a);
+    a = cargarPila();
+while(!pilavacia(&a)){
+    suma = suma + desapilar(&a);
+}
+return suma;
+}
+
+int cantidadPila(){
+    int cantidad;
+    cantidad = 0;
+    Pila a;
+    inicpila(&a);
+    while(!pilavacia(&a)){
+        cantidad++;
+        desapilar(&a);
+    }
+    return cantidad;
+}
+float dividirPila(){
+ int suma, cantidad;
+ float division;
+    suma = sumarPila();
+    cantidad = cantidadPila();
+    division = suma / cantidad;
+
+
+return division;
+}
+
+///       PUNTEROS:
+///       Intercambio:
+/* Arriba del main: void intercambioConPuntero(*a,*b);
+
+
+Dentro del main:
+int p=10, q=20;
+printf (" valores en el main antes del intercambio:"p,q,intercambio);
+intercambio=(p,q);
+printf (" valores en el main luego del intercambio:"p,q,intercambio);
+
+intercambio=(&p,&q);
+printf ("valores en el main luego del intercambio:"p,q,intercambio);
+
+Abajo del main:
+void intercambioConPuntero (int* a, int* b){
+int aux;
+aux=*a;
+*a=*b;
+*b=aux;
+printf("Valores dentro de la funcion: a=%d b=%d aux=%d",*a,*b,aux);
+
+ EJEMPLO:
+int numero=9;
+int num2=20:
+int*punteroInt=&numero(9);
+*punteroInt=50;
+numero=50;
+punteroInt=&num2(20);
+*punteroInt=30
+num2=30
+*/
+
+
